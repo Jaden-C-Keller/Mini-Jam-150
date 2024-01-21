@@ -5,31 +5,25 @@ using UnityEngine;
 public class Entities : MonoBehaviour
 {
     public static List<Rewindable> rewindables = new List<Rewindable>();
-    public static List<CompositeCollider2D> walls = new List<CompositeCollider2D>();
-    public static List<CompositeCollider2D> water = new List<CompositeCollider2D>();
+    public static List<BoxCollider2D> walls;
+    public static List<BoxCollider2D> water;
     public static List<Box> boxes = new List<Box>();
     public static List<Candle> candles = new List<Candle>();
+    public static List<BoxCollider2D> rooms = new List<BoxCollider2D>();
     public static int step = 0;
     
 
     private void Start()
     {
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("wall"))
-        {
-            walls.Add(obj.GetComponent<CompositeCollider2D>());
-        }
+        walls = new List<BoxCollider2D>(GameObject.FindGameObjectWithTag("wall").GetComponents<BoxCollider2D>());
 
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
-        {
-            water.Add(obj.GetComponent<CompositeCollider2D>());
-        }
+        water = new List<BoxCollider2D>(GameObject.FindGameObjectWithTag("water").GetComponents<BoxCollider2D>());    
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("candle"))
         {
             Candle candle = obj.GetComponent<Candle>();
             candles.Add(candle);
             rewindables.Add(candle);
-
         }
 
         Darkness.checkLight();
@@ -39,10 +33,15 @@ public class Entities : MonoBehaviour
             Box box = obj.GetComponent<Box>();
             rewindables.Add(box);
             box.CandleCheck();
+            box.Move(Vector3.zero);
+            box.audio.Stop();
             boxes.Add(box);
         }
 
-        
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("room"))
+        {
+            rooms.Add(obj.GetComponent<BoxCollider2D>());
+        }
     }
 
     public static void record()

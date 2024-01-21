@@ -21,13 +21,16 @@ public class WoodenBox : Box
 
     public override bool Move(Vector3 direction)
     {
-        
+
+        Vector3 prev = transform.position;
+
         bool moved = base.Move(direction);
 
         if(!moved)
         {
             if(floating && transform.childCount == 1)
             {
+                this.direction = Vector3.zero;
                 transform.GetChild(0).SendMessage("drop");
             }
             return false;
@@ -42,7 +45,7 @@ public class WoodenBox : Box
         floating = false;
         
 
-        foreach (CompositeCollider2D water in Entities.water)
+        foreach (BoxCollider2D water in Entities.water)
         {
             if (water.bounds.Contains(transform.position))
             {
@@ -82,7 +85,7 @@ public class WoodenBox : Box
             directions.Push(this.direction);
         }
 
-        if(!startedFloating && !floating)
+        if (render.sprite != sunk && prev != transform.position && !floating && !startedFloating)
         {
             audio.Play();
         }
@@ -104,7 +107,10 @@ public class WoodenBox : Box
     public static void Float(){
         foreach(WoodenBox box in woodenBoxes)
         {
-            box.Move(box.direction);
+            if (box.direction != Vector3.zero)
+            {
+                box.Move(box.direction);
+            }
         }
     }
 

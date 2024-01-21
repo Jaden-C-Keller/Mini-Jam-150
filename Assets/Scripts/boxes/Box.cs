@@ -24,7 +24,7 @@ public class Box : MonoBehaviour, Rewindable
     {
         Vector3 newPos = transform.position + direction;
 
-        foreach (CompositeCollider2D wall in Entities.walls)
+        foreach (BoxCollider2D wall in Entities.walls)
         {
             if (wall.bounds.Contains(newPos))
             {
@@ -34,7 +34,7 @@ public class Box : MonoBehaviour, Rewindable
 
         foreach (Box box in Entities.boxes)
         {
-            if(!box.walkable && newPos == box.transform.position)
+            if(box != this && !box.walkable && newPos == box.transform.position)
             {
                 return false;
             }

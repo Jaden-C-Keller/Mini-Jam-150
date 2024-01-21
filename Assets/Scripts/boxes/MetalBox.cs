@@ -6,16 +6,20 @@ public class MetalBox : Box
 {
     public override bool Move(Vector3 direction)
     {
+        Vector3 prev = transform.position;
+
         bool moved = base.Move(direction);
+
 
         if (moved)
         {
             audio.clip = slide;
-            foreach (CompositeCollider2D water in Entities.water)
+            foreach (BoxCollider2D water in Entities.water)
             {
                 
                 if (water.bounds.Contains(transform.position))
                 {
+
                     bool willSink = true;
                     foreach (Box box in Entities.boxes)
                     {
@@ -35,9 +39,14 @@ public class MetalBox : Box
                     break;
                 }
             }
+
+            if(prev != transform.position)
+            {
+                audio.Play();
+            }
         }
 
-        audio.Play();
+        
 
         return moved;
     }

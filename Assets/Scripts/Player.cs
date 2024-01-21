@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, Rewindable
 {
+    public Transform cam;
+    public Transform startingCam;
     public GameObject lossText;
     public new AudioSource audio;
     public AudioClip step, drag, undo;
@@ -11,10 +13,17 @@ public class Player : MonoBehaviour, Rewindable
     Stack<Vector3> positions = new Stack<Vector3>();
     float timer = 0f;
     float undoTimer = 0f;
+    float camTimer = 0f;
+    Vector3 camTarget;
+    Vector3 camPos;
+    Vector3 offset;
 
     private void Awake()
     {
+        offset = Vector3.back * 10f;
         Entities.rewindables.Add(this);
+        camTarget = startingCam.position + offset;
+        cam.position = camTarget;
     }
     
 
@@ -58,6 +67,7 @@ public class Player : MonoBehaviour, Rewindable
                 audio.clip = undo;
                 audio.Play();
                 Entities.undo();
+                checkCam();
                 lossText.SetActive(false);
             }
             
@@ -68,13 +78,19 @@ public class Player : MonoBehaviour, Rewindable
         {
             undoTimer = 0f;
         }
+
+        if(camTarget != cam.position)
+        {
+            cam.position = Vector3.Lerp(camPos, camTarget, camTimer);
+            camTimer += Time.deltaTime * 0.8f;
+        }
     }
 
     private void move(Vector3 direction)
     {
         Vector3 newPos = transform.position + direction;
 
-        foreach (CompositeCollider2D wall in Entities.walls)
+        foreach (BoxCollider2D wall in Entities.walls)
         {
             if (wall.bounds.Contains(newPos))
             {
@@ -109,7 +125,7 @@ public class Player : MonoBehaviour, Rewindable
 
         if (doWater)
         {
-            foreach (CompositeCollider2D water in Entities.water)
+            foreach (BoxCollider2D water in Entities.water)
             {
                 if (water.bounds.Contains(newPos))
                 {
@@ -128,6 +144,24 @@ public class Player : MonoBehaviour, Rewindable
 
         audio.clip = step;
         audio.Play();
+
+        checkCam();
+    }
+
+    void checkCam()
+    {
+        foreach (BoxCollider2D room in Entities.rooms)
+        {
+            if (room.bounds.Contains(transform.position))
+            {
+                if (room.transform.position + offset != camTarget)
+                {
+                    camTarget = room.transform.position + offset;
+                    camPos = cam.position;
+                    camTimer = 0f;
+                }
+            }
+        }
     }
 
     public void add()

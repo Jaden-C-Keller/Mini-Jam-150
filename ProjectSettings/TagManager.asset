@@ -8,6 +8,7 @@ TagManager:
   - box
   - candle
   - water
+  - room
   layers:
   - Default
   - TransparentFX

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1421672003, guid: 7407f4a550969794b9d968037e038b27, type: 3}
+  m_Sprite: {fileID: -593090838, guid: 25a38367bc685d1419c89bb06d399650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   render: {fileID: 8721478258286857431}
-  start: {fileID: -1421672003, guid: 7407f4a550969794b9d968037e038b27, type: 3}
-  sunk: {fileID: -380212840, guid: 7407f4a550969794b9d968037e038b27, type: 3}
+  start: {fileID: -593090838, guid: 25a38367bc685d1419c89bb06d399650, type: 3}
+  sunk: {fileID: 836955316, guid: 25a38367bc685d1419c89bb06d399650, type: 3}
   audio: {fileID: 5399139174766368056}
   slide: {fileID: 8300000, guid: 61732e7bbace60f49a8634fa79013e75, type: 3}
   water: {fileID: 8300000, guid: 4e343bb427fdec14b90422a4550b3106, type: 3}

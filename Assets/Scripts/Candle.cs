@@ -14,6 +14,7 @@ public class Candle : MonoBehaviour, Rewindable
     private void Awake()
     {
         gameObject.tag = "candle";
+        transform.parent = null;
     }
 
     public void pickup(Transform parent)
@@ -33,7 +34,7 @@ public class Candle : MonoBehaviour, Rewindable
         {
             spriteTransform.position -= Vector3.up * 0.25f;
         }
-        sprite.sortingOrder = 0;
+        sprite.sortingOrder = 1;
     }
 
     public void lower()
