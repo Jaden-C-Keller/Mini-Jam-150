@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1298074854, guid: 678ea0d7234277d4ca09c3fd8fb86724, type: 3}
+  m_Sprite: {fileID: -912304227, guid: 9ae19966db6fe804daa02a5c581c8d8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   render: {fileID: 8721478258286857431}
-  start: {fileID: 1298074854, guid: 678ea0d7234277d4ca09c3fd8fb86724, type: 3}
-  sunk: {fileID: 1011662245, guid: 678ea0d7234277d4ca09c3fd8fb86724, type: 3}
+  start: {fileID: -912304227, guid: 9ae19966db6fe804daa02a5c581c8d8f, type: 3}
+  sunk: {fileID: 1323392388, guid: 9ae19966db6fe804daa02a5c581c8d8f, type: 3}
   audio: {fileID: -1429481457986329161}
-  slide: {fileID: 8300000, guid: 61732e7bbace60f49a8634fa79013e75, type: 3}
+  slide: {fileID: 8300000, guid: 0ad2f5513b21cc44ebddb8d41a692fe6, type: 3}
   water: {fileID: 8300000, guid: 1db024d62ea676e4583f7160d0fe9baa, type: 3}
   walkable: 0
 --- !u!82 &-1429481457986329161

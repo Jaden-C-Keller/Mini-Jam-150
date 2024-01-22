@@ -47,17 +47,17 @@ public class Box : MonoBehaviour, Rewindable
         return true;
     }
 
-    private void Update()
-    {
-        if (Darkness.inShadow(transform.position))
-        {
-            render.color = new Color(.8f, .8f, .8f);
-        }
-        else
-        {
-            render.color = Color.white;
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Darkness.inShadow(transform.position))
+    //    {
+    //        render.color = new Color(.8f, .8f, .8f);
+    //    }
+    //    else
+    //    {
+    //        render.color = Color.white;
+    //    }
+    //}
 
     public void CandleCheck()
     {

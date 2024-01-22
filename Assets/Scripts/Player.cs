@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, Rewindable
 {
+    public Transform tp1, tp2;
     public Transform cam;
     public Transform startingCam;
     public GameObject lossText;
+    public GameObject winText;
+    public Transform win;
     public new AudioSource audio;
-    public AudioClip step, drag, undo;
+    public AudioClip step, drag, undo, fall;
 
     Stack<Vector3> positions = new Stack<Vector3>();
     float timer = 0f;
@@ -44,7 +47,7 @@ public class Player : MonoBehaviour, Rewindable
             direction = new Vector3(input, 0f);
         }
 
-        if(!lossText.activeSelf && !undoDown && timer == 0f && direction != Vector3.zero)
+        if(!lossText.activeSelf && !winText.activeSelf && !undoDown && timer == 0f && direction != Vector3.zero)
         {
             move(direction);
         }
@@ -62,7 +65,7 @@ public class Player : MonoBehaviour, Rewindable
         
         if (undoDown)
         {
-            if(Entities.step > 0 && undoTimer == 0f)
+            if(Entities.step > 0 && undoTimer == 0f && !winText.activeSelf)
             {
                 audio.clip = undo;
                 audio.Play();
@@ -142,7 +145,23 @@ public class Player : MonoBehaviour, Rewindable
             return;
         }
 
+        if (transform.position == win.position)
+        {
+            winText.SetActive(true);
+        }
+
         audio.clip = step;
+        
+
+        if(transform.position == tp1.position)
+        {
+            transform.position = tp2.position;
+            checkCam();
+            cam.position = camTarget;
+            Entities.step = 0;
+            audio.clip = fall;
+        }
+
         audio.Play();
 
         checkCam();

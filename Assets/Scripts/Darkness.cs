@@ -20,6 +20,8 @@ public class Darkness : MonoBehaviour
     {
         pos = translate(pos);
 
+        if (pos.y < 0 || pos.y >= tile.Count || pos.x < 0 || pos.x >= tile[0].Count) return false;
+
         return tile[(int)pos.y][(int)pos.x].activeSelf;
     }
 
